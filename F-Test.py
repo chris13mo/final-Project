@@ -9,17 +9,37 @@ def introduction():
     print ("\t      You will know what you are paying for!")
     print ("\t   Go ahead and see why our way is the best way!")
 
-def color():
+def color(): 
+    choiceColor = 0
     colors = open("CarSalesApplicationColor.txt", "r")
-    color = colors.readlines()
-    print ("We dont charge for the color")
-    print (color)
-    choiceColor = input("What color would you like? ")
-    return choiceColor
+    #color = colors.readlines()
+    print ("\nWe dont charge for the color")
+    for color in colors:
+        print (color)
+    while choiceColor < 1 or choiceColor > 5:
+        try:
+            choiceColor = int(input("Enter the number of the color would you like? "))
+        except:
+            continue
+        if choiceColor == 1:
+            usersColor = str("Red")
+        if choiceColor == 2:
+            usersColor = str("Blue")
+        if choiceColor == 3:
+            usersColor = str("Green")
+        if choiceColor == 4:
+            usersColor = str("Grey")
+        if choiceColor == 5:
+            usersColor = str("Black")
+        else:
+            print ("Please enter a valid Choice, '1', '2', '3', '4', '5': ")
+
+    return usersColor
     colors.close()
 
+
 def vechical():
-    vechical = ""
+    vechical = 0
     vechicalBill = 0
     print ("You have your choice of three vechical types!")
     print(
@@ -30,24 +50,33 @@ def vechical():
           """
             )
     
-    while vechical != 1 or vechical != 2 or vechical != 3:
-        vechical = input ("What type of vechical would you like? ")
-        if vechical == "1":
-            bill = 8000
-        elif vechical == "2":
+    while vechical < 1 or vechical > 3:
+        try:
+            vechical = int(input ("What type of vechical would you like? "))
+        except:
+            continue
+        if vechical == 1:
+            vechicalBill = int(8000)
+            vechicalChoice = str("Car")
+        elif vechical == 2:
             print ("Nice Choice!")
-            vechicalBill = 10000
-        elif vechical == "3":
+            vechicalBill = int(10000)
+            vechicalChoice = str("SUV")
+        elif vechical == 3:
             print ("A Truck Nice") 
-            vechicalBill = 12000
+            vechicalBill == int(12000)
+            vechicalChoice = str("Truck")
         else:
             print("Please enter a valid choice")
-            vechicalBill = input ("What type of vechical would you like? ")
-        return  vechicalBill   
+            #vechical = int(input ("What type of vechical would you like? "))
+    return  vechicalChoice, vechicalBill   
 
 def engine():
     engineBill= ""
-    while engine != 1 or enigne != 2 or engine != 3:
+    engineSize = ""
+    engineChoice = 0
+
+    while engineChoice < 1 or  engineChoice > 3:
         print("How fast do you want to go??")
         print(
             """
@@ -55,19 +84,25 @@ def engine():
         2- Meduim - $7,000
         3- Large - $9,000
         """)
-        engineChoice = input("What size engine do you want? ")
-        if engineChoice == "1":
+        try:
+            engineChoice = int(input("What size engine do you want? "))
+        except:
+            continue
+        if engineChoice == 1:
             print ("Well at least you will get good gas milage!")
             engineBill = int(5000)
-        elif engineChoice == "2":
+            engineSize = str("Small Engine")
+        elif engineChoice == 2:
             print("Right in the middle good gas milage and power!")
             engineBill = int(7000)
-        elif engineChoice == "3":
-            print ("You better hold on to you pants!")
+            engineSize = str("Meduim Engine")
+        elif engineChoice == 3:
+            print ("You better hold on to your pants!")
             engineBill = int(9000)
+            engineSize = str("Large Engine")
         else:
-             engineChoice = input("Please enter a valid choice '1', '2', '3'")
-        return  engineBill
+             print("Please enter a valid choice '1', '2', '3'")
+    return  engineSize, engineBill
 
 def calRecipt(subTotal, tax, total):
     recipt = open("recipt.txt", "w")
@@ -89,6 +124,9 @@ def main():
     introduction()
     vechicalBill= 0
     engineBill= 0
+    engineSize = ""
+    vechicalChoice= ""
+    usersColor= ""
 
     
    
@@ -103,17 +141,25 @@ def main():
 
         if choice == "0":
             
-            vechicalBill = vechical()
-            engineBill = engine()
+            vechicalChoice, vechicalBill = vechical()
+            engineSize, engineBill = engine()
+            usersColor = color()
             
 
             subTotal = vechicalBill + engineBill
             tax = subTotal* .0571
+            tax= float("%0.2f"%tax)
             total = subTotal + tax
 
             calRecipt(subTotal, tax, total)
             recipt=open("recipt.txt", "r" )
-            print (recipt.read())
+            print ("\nYour Vechical")
+            print ("You choose: ", vechicalChoice)
+            print ("You choose: ", engineSize)
+            print ("You choose: ", usersColor)
+            print ("Vechical Sub Total:", recipt.readline())
+            print ("Tax:", recipt.readline())
+            print ("Total:", recipt.readline())
             recipt.close()
 
         elif choice == "1":
