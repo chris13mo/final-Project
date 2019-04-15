@@ -64,7 +64,7 @@ def vechical():
             vechicalChoice = str("SUV")
         elif vechical == 3:
             print ("A Truck Nice") 
-            vechicalBill == int(12000)
+            vechicalBill = int(12000)
             vechicalChoice = str("Truck")
         else:
             print("Please enter a valid choice")
