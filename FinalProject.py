@@ -12,9 +12,9 @@ def introduction():
 def color(): 
     choiceColor = 0
     colors = open("CarSalesApplicationColor.txt", "r")
-    #color = colors.readlines()
+    colorArry = colors.readlines()
     print ("\nWe dont charge for the color")
-    for color in colors:
+    for color in colorArry:
         print (color)
     while choiceColor < 1 or choiceColor > 5:
         try:
@@ -106,9 +106,9 @@ def engine():
 
 def calRecipt(subTotal, tax, total):
     recipt = open("recipt.txt", "w")
-    recipt.write(str(subTotal) + "\n")
-    recipt.write(str(tax) + "\n")
-    recipt.write(str(total) + "\n")
+    recipt.write("Sub Total: " + str (subTotal) + "\n")
+    recipt.write("Tax: " + str (tax) + "\n")
+    recipt.write("Total: " +str(total) + "\n")
     recipt.close()
     return recipt
 
@@ -157,9 +157,9 @@ def main():
             print ("You choose: ", vechicalChoice)
             print ("You choose: ", engineSize)
             print ("You choose: ", usersColor)
-            print ("Vechical Sub Total:", recipt.readline())
-            print ("Tax:", recipt.readline())
-            print ("Total:", recipt.readline())
+            print ( recipt.readline())
+            print ( recipt.readline())
+            print ( recipt.readline())
             recipt.close()
 
         elif choice == "1":
